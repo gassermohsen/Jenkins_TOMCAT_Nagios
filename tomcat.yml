@@ -1,40 +1,40 @@
-# - name: Transfer and execute a script.
-#   hosts: all
-#   tasks:
-#      - name: Copy and Execute the script 
-#        script: /home/gasser/ansible/tomcat.sh
+- name: Transfer and execute a script.
+  hosts: all
+  tasks:
+     - name: Copy and Execute the script 
+       script: /home/gasser/ansible/tomcat.sh
 
 
 
-# - name: Add user to Tomcat Manager
-#   hosts: all
-#   gather_facts: no
-#   become_user: pet-clinic  
-#   become_method: su 
-#   become: true
+- name: Add user to Tomcat Manager
+  hosts: all
+  gather_facts: no
+  become_user: pet-clinic  
+  become_method: su 
+  become: true
 
   
-#   vars:
-#     # ansible_user: pet-clinic
-#     # ansible_ssh_user: pet-clinic
-#     # ansible_user_password: 123
+  vars:
+    # ansible_user: pet-clinic
+    # ansible_ssh_user: pet-clinic
+    # ansible_user_password: 123
     
-#     tomcat_users_file_path: "/home/pet-clinic/apache-tomcat-9.0.78/conf/tomcat-users.xml"
-#     tomcat_manager_user: admin
-#     tomcat_manager_password: 123
-#   tasks:
-#     - shell: 'ls -l'
-#       register: command_output
-#     - debug:
-#         var: command_output.stdout_lines  
-#     - name: Add user to tomcat-users.xml
-#       lineinfile:
-#         path: "{{ tomcat_users_file_path }}"
-#         insertbefore: '</tomcat-users>'
-#         line: |
-#           <role rolename="manager-gui"/>
-#           <user username="{{ tomcat_manager_user }}" password="{{ tomcat_manager_password }}" roles="manager-gui"/>
-#         state: present
+    tomcat_users_file_path: "/home/pet-clinic/apache-tomcat-9.0.78/conf/tomcat-users.xml"
+    tomcat_manager_user: admin
+    tomcat_manager_password: 123
+  tasks:
+    - shell: 'ls -l'
+      register: command_output
+    - debug:
+        var: command_output.stdout_lines  
+    - name: Add user to tomcat-users.xml
+      lineinfile:
+        path: "{{ tomcat_users_file_path }}"
+        insertbefore: '</tomcat-users>'
+        line: |
+          <role rolename="manager-gui"/>
+          <user username="{{ tomcat_manager_user }}" password="{{ tomcat_manager_password }}" roles="manager-gui"/>
+        state: present
 
 
 - name: install jenkins
@@ -48,15 +48,15 @@
 
 
   tasks: 
-    # - name: install jenkins
-    #   get_url:
-    #     url: https://get.jenkins.io/war-stable/2.401.2/jenkins.war
-    #     dest: /home/pet-clinic
-    #     mode: 0755
-    #     checksum: sha256:86bd8e0b2b51075c99b00d43603c2858440bf011ecd089a5c791d0c964d40682
-    #     group: pet-clinic
-    #     owner: pet-clinic
+    - name: install jenkins
+      get_url:
+        url: https://get.jenkins.io/war-stable/2.401.2/jenkins.war
+        dest: /home/pet-clinic
+        mode: 0755
+        checksum: sha256:86bd8e0b2b51075c99b00d43603c2858440bf011ecd089a5c791d0c964d40682
+        group: pet-clinic
+        owner: pet-clinic
 
 
     - name: Install Jenkins as a service
-      shell: java -jar /home/pet-clinic/jenkins.war --enable-future-java --httpPort=8080 > /dev/null 2>&1 &
+      shell: java -jar /home/pet-clinic/jenkins.war --enable-future-java --httpPort=8090 > /dev/null 2>&1 &
