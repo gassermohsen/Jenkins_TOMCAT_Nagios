@@ -5,8 +5,7 @@ pipeline {
         stage('Hello') {
             steps {
                 echo 'Hello World'
-                sh ' git clone https://github.com/spring-projects/spring-petclinic.git'
-            }
+                sh '/home/pet-clinic/./build.sh'
         }
     }
 }
