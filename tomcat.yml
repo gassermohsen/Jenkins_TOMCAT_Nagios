@@ -19,7 +19,7 @@
     # ansible_ssh_user: pet-clinic
     # ansible_user_password: 123
     
-    tomcat_users_file_path: "/home/pet-clinic/apache-tomcat-9.0.78/conf/tomcat-users.xml"
+    tomcat_users_file_path: "/home/pet-clinic/apache-tomcat-10.1.11/conf/tomcat-users.xml"
     tomcat_manager_user: admin
     tomcat_manager_password: 123
   tasks:

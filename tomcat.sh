@@ -1,6 +1,6 @@
 user=pet-clinic
 PATH=$(echo $PATH)
-JAVA_HOME=/home/$user/jdk-17.0.8
+JAVA_HOME=/home/$user/jdk-20.0.2
 # Check if user exists in the system by getent command to retrive info if exists in the passwd file
 
 # If no user exists Create one
@@ -62,18 +62,18 @@ else
     echo "Java not Installed on this user installing Java"
     echo "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     cd /home/$user
-    wget -P /home/pet-clinic https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
-    tar xvzf jdk-17_linux-x64_bin.tar.gz
+    wget -P /home/pet-clinic https://download.oracle.com/java/20/latest/jdk-20_linux-x64_bin.tar.gz
+    tar xvzf jdk-20_linux-x64_bin.tar.gz
 
-    echo "export JAVA_HOME=\"/home/$user/jdk-17.0.8\"" >> /home/pet-clinic/.profile
+    echo "export JAVA_HOME=\"/home/$user/jdk-20.0.2\"" >> /home/pet-clinic/.profile
     echo "export PATH=\"\$PATH:$JAVA_HOME/bin\"" >> /home/pet-clinic/.profile
     . /home/$user/.profile
     echo "\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     echo "\nJava Installed Succesfully"
     echo "\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-    curl -O https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.78/bin/apache-tomcat-9.0.78.tar.gz
-    tar xf apache-tomcat-9.0.78.tar.gz
-    /home/pet-clinic/apache-tomcat-9.0.78/bin/./startup.sh
+    wget -P /home/pet-clinic https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.11/bin/apache-tomcat-10.1.11.tar.gz
+    tar xf apache-tomcat-10.1.11.tar.gz
+    /home/pet-clinic/apache-tomcat-10.1.11/bin/./startup.sh
 
      
     
