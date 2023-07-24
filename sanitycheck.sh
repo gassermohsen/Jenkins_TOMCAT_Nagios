@@ -10,6 +10,7 @@ for i in $(seq 1 $max_retries); do
     if [ $response -ne 200 ]; then
         echo "Sanity check failed: Application is not running (attempt $i of $max_retries)"
         if [ $i -eq $max_retries ]; then
+        
             echo "Sanity check failed after $i attempts"
             echo "Rolling Back to the previous version"
 
