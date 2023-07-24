@@ -1,0 +1,40 @@
+- name: Transfer and execute a script to install nagios.
+  hosts: all
+  become: true
+  tasks:
+     - name: Execute the script
+       script: /home/gasser/ansible/nagios_install.sh
+
+
+- name: Create file with contents
+  hosts: all
+  become: true
+  tasks:
+    - name: Create file
+      copy:
+        content: |
+          define host{
+            use                     linux-server
+            host_name               pet-clinic
+            alias                   pet-clinic Website
+            address                 localhost:9090/spring-petclinic/
+          }
+
+          define service{
+            use                     generic-service
+            host_name               pet-clinic
+            service_description     Check Content
+            check_command           check_http! -w 5 -c 10 --ssl
+          }
+        dest: /usr/local/nagios/etc/objects/websites.cfg
+  
+    
+    - name: Add a line to the end of a file
+      lineinfile:
+        path: /usr/local/nagios/etc/nagios.cfg
+        line: "cfg_file=/usr/local/nagios/etc/objects/websites.cfg"
+        regexp: '$'
+        
+    - name: Add the webesites.cfg configuration to nagios.cfg
+      command: systemctl restart nagios
+      
