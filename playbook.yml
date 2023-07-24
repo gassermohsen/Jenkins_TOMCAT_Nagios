@@ -1,3 +1,4 @@
+# Run Shell script to create pet-clinic user , install java & tomcat 
 - name: Transfer and execute a script.
   hosts: all
   tasks:
@@ -5,7 +6,7 @@
        script: /home/gasser/ansible/tomcat.sh
 
 
-
+# Add Admin user to Tomcat deployment manager
 - name: Add user to Tomcat Manager
   hosts: all
   gather_facts: no
@@ -37,6 +38,9 @@
       command: /home/pet-clinic/apache-tomcat-10.1.11/bin/./startup.sh
 
 
+
+# Install Jenkins
+
 - name: install jenkins
   hosts: all
   gather_facts: no
@@ -44,7 +48,6 @@
   become_method: su 
   become: true
   become_flags: '--login'
-
 
 
   tasks: 
@@ -57,10 +60,12 @@
         group: pet-clinic
         owner: pet-clinic
 
-
-    - name: Install Jenkins as a service
+# Run Jenkins
+    - name: Run jenkins
       shell: java -jar /home/pet-clinic/jenkins.war --enable-future-java --httpPort=8090 > /dev/null 2>&1 &
 
+
+# Task to copy the application build & sanity checks scripts to pet-clinic user and execute the build script
 
 - name: Copy build script and run it on ansible user 
   hosts: all

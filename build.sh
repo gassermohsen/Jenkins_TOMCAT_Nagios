@@ -14,7 +14,7 @@ while true; do
 
   # Check if the directory already exists
   if [ ! -d "${basedir}/${dirname}" ]; then
-    # Create the directory and exit the loop
+    # Create the directory
     mkdir "${basedir}/${dirname}"
     cd "${basedir}/${dirname}"
     git clone https://github.com/spring-projects/spring-petclinic.git

@@ -1,3 +1,5 @@
+#Install nagios by shell script with sudo 
+
 - name: Transfer and execute a script to install nagios.
   hosts: all
   become: true
@@ -5,7 +7,7 @@
      - name: Execute the script
        script: /home/gasser/ansible/nagios_install.sh
 
-
+# Monitor the pet-clinic app 
 - name: Create file with contents
   hosts: all
   become: true
