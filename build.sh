@@ -35,9 +35,16 @@ while true; do
 
     ./mvnw clean package
 
+    rm -rf /home/pet-clinic/apache-tomcat-10.1.11/webapps/spring-petclinic.war /home/pet-clinic/apache-tomcat-10.1.11/webapps/spring-petclinic
 
-
+    #Deploy the app to tomcat web apps dir
     cp ${basedir}/${dirname}/spring-petclinic/target/spring-petclinic.war ~/apache-tomcat-10.1.11/webapps/
+
+    # Restart tomcat server
+    /home/pet-clinic/apache-tomcat-10.1.11/bin/./shutdown.sh
+    /home/pet-clinic/apache-tomcat-10.1.11/bin/./startup.sh
+
+    echo "lastdeploy:petclinic:v:$version" >> /home/pet-clinic/build_directory/build_history
 
 
     break
