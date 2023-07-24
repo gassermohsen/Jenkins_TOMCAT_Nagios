@@ -4,7 +4,7 @@ This project is aimed at automating the deployment of a Spring Pet Clinic web ap
 
 ### Ansible
 
-Ansible tool that allows you to automate the configuration and deployment of your infrastructure. In this project, Ansible is used to automate the installation of Java and Tomcat on your local machine.
+Ansible allows you to automate the configuration and deployment of your infrastructure. In this project, Ansible is used to automate the installation of Java and Tomcat on your local machine.
 
 ### Jenkins
 
@@ -47,14 +47,14 @@ git clone https://github.com/gassermohsen/Jenkins_TOMCAT_Nagios.git
 
 > **_NOTE:_** To change the pet-clinic user password open the file.txt and edit the password from it 
 
+###### For ubuntu users 
+
 2. Install ansible.
 ```bash
 apt install ansible 
 ```
-###### For ubuntu users 
 
-> **Warning:** Before using the playbook please edit the paths with the directory you clone on.
-
+> <span style="color:red">***Warning:** Before using the playbook please edit the paths with the directory you clone on. </span>
 3. Run ansible playbook on your localhost. 
 ```bash 
 ansible-playbook -i hosts playbook.yml -K  
