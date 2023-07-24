@@ -39,12 +39,21 @@ fi
 
 
 # Reads the user password to install java if needed
+<<<<<<< HEAD
 echo -n "Please enter the password for user $user to check for java" 
 #read -d $'\x04' password < "$file"
 
 
 su - $user <<EOF
 $password
+=======
+#echo -n "Please enter the password for user $user to check for java" 
+#read -d $'\x04' password < "$file"
+password1=$(cat file.txt)
+
+su - $user <<EOF
+$password1
+>>>>>>> 4d77b53 (editing build script)
 
 # Checks for java if exists to download it 
 
@@ -52,10 +61,17 @@ if java -version 2>&1 >/dev/null | grep -q "java version" ; then
 
     # Checks for Java version
 
+<<<<<<< HEAD
     echo "\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
     java_version=\$(java -version 2>&1 >/dev/null | sed 's/\"//g' | grep "java version "| awk '{print \$3}')
     echo "\nJava already installed with version \$java_version"
     echo "\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+=======
+    echo "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+    java_version=\$(java -version 2>&1 >/dev/null | sed 's/\"//g' | grep "java version "| awk '{print \$3}')
+    echo "Java already installed with version \$java_version"
+    echo "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+>>>>>>> 4d77b53 (editing build script)
 
 else 
     echo "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
@@ -74,7 +90,11 @@ else
     wget -P /home/pet-clinic https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.11/bin/apache-tomcat-10.1.11.tar.gz
     tar xf apache-tomcat-10.1.11.tar.gz
     /home/pet-clinic/apache-tomcat-10.1.11/bin/./startup.sh
+<<<<<<< HEAD
 
+=======
+    mkdir /home/pet-clinic/build_directory
+>>>>>>> 4d77b53 (editing build script)
      
     
 
