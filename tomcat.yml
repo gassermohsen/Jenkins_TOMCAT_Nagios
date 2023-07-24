@@ -14,11 +14,7 @@
   become: true
 
   
-  vars:
-    # ansible_user: pet-clinic
-    # ansible_ssh_user: pet-clinic
-    # ansible_user_password: 123
-    
+  vars:    
     tomcat_users_file_path: "/home/pet-clinic/apache-tomcat-10.1.11/conf/tomcat-users.xml"
     tomcat_manager_user: admin
     tomcat_manager_password: 123
@@ -60,3 +56,29 @@
 
     - name: Install Jenkins as a service
       shell: java -jar /home/pet-clinic/jenkins.war --enable-future-java --httpPort=8090 > /dev/null 2>&1 &
+
+
+- name: Copy build script and run it on ansible user 
+  hosts: all
+  gather_facts: no
+  become_user: pet-clinic  
+  become_method: su 
+  become: true
+  become_flags: '--login'
+  tasks:
+    - name: Copy build script
+      copy:
+        src: /home/gasser/ansible/build.sh
+        dest: /home/pet-clinic/build_directory
+        owner: pet-clinic
+        group: pet-clinic
+        mode: '0755'
+    - name: Copy Saint checks script 
+        src: /home/gasser/ansible/sanitycheck.sh
+        dest: /home/pet-clinic/build_directory
+        owner: pet-clinic
+        group: pet-clinic
+        mode: '0755'
+    - name: Execute the script
+      shell: /home/pet-clinic/build_directory/./build.sh
+        

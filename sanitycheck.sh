@@ -36,10 +36,12 @@ for i in $(seq 1 $max_retries); do
             /home/pet-clinic/apache-tomcat-10.1.11/bin/./shutdown.sh
             /home/pet-clinic/apache-tomcat-10.1.11/bin/./startup.sh
 
+            echo "lastdeploy:petclinic:v:$lastversion" >> /home/pet-clinic/build_directory/build_history
+
 
         fi 
         fi
-        sleep 2
+        sleep 5
     else
         echo "Sanity check passed: Application is running"
         break
