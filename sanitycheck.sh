@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set the maximum number of retries
-max_retries=3
+max_retries=4
 
 # Loop and retry the check
 for i in $(seq 1 $max_retries); do
@@ -15,7 +15,7 @@ for i in $(seq 1 $max_retries); do
 
             declare -i lastversion=$(tail -1 /home/pet-clinic/build_directory/build_history | awk -F : '{print $4'})-1
 
-            # Checks if the last verision equails one so you can't rollback just restart the server 
+            # Checks if the last verision equals one so you can't rollback just restart the server 
             if [ $lastversion -eq 0]; then
         
             # Restart tomcat server 

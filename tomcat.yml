@@ -19,8 +19,6 @@
     tomcat_manager_user: admin
     tomcat_manager_password: 123
   tasks:
-    - shell: 'ls -l'
-      register: command_output
     - debug:
         var: command_output.stdout_lines  
     - name: Add user to tomcat-users.xml
@@ -31,6 +29,12 @@
           <role rolename="manager-gui"/>
           <user username="{{ tomcat_manager_user }}" password="{{ tomcat_manager_password }}" roles="manager-gui"/>
         state: present
+    - name: Tomcat on port 9090
+      command: sed -i 's/<Connector port="8080"/<Connector port="9090"/' /home/pet-clinic/apache-tomcat-10.1.11/conf/server.xml
+
+    - name: Restart tomcat
+      command: /home/pet-clinic/apache-tomcat-10.1.11/bin/./shutdown.sh
+      command: /home/pet-clinic/apache-tomcat-10.1.11/bin/./startup.sh
 
 
 - name: install jenkins
