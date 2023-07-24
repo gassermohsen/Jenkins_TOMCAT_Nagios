@@ -80,7 +80,6 @@ else
     touch /home/pet-clinic/build_directory/build_history
      
     
-
 fi
 
 EOF
