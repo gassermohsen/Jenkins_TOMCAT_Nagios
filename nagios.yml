@@ -15,19 +15,13 @@
     - name: Create file
       copy:
         content: |
-          define host{
-            use                     linux-server
-            host_name               pet-clinic
-            alias                   pet-clinic Website
-            address                 localhost:9090/spring-petclinic/
-          }
-
           define service{
             use                     generic-service
-            host_name               pet-clinic
-            service_description     Check Content
-            check_command           check_http! -w 5 -c 10 --ssl
+            host_name               localhost
+            service_description     Check Pet-clinic App
+            check_command           check_http! -w 5 -c 10 -H 127.0.0.1 -p 9090 -u /spring-petclinic/ --sni -f follow -vvv
           }
+          
         dest: /usr/local/nagios/etc/objects/websites.cfg
   
     
